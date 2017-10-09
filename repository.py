@@ -14,3 +14,7 @@ class Repository:
     def load(self, patient_id):
         patient = self.patients.find_one({"_id": ObjectId(patient_id)})
         return patient
+
+    def search_one(self, patient_name):
+        patient = self.patients.find_one({"name": patient_name})
+        return patient

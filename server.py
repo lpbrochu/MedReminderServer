@@ -22,4 +22,21 @@ def create_patient():
     return output
 
 
+@route('/patients', method='GET')
+def search_patient():
+    name = request.query['name']
+    output = None
+
+    if name is not None:
+        patient = repo.search_one(name)
+
+        if patient is not None:
+            output = template('<b>Found patient {{name}}, it is {{patient}}</b>!', name=patient['name'], patient=dumps(patient))
+
+    if output is None:
+        output = template('Nothing found for patient {{name}}', name=name)
+
+    return output
+
+
 run(host='localhost', port=8080, debug=True)
