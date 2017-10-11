@@ -1,21 +1,20 @@
 import json
 
-from bottle import Bottle, request, template
+from bottle import route, run, template, request
 from bson.json_util import dumps
 
-from medicine_repository import MedicineRepository
+from old.patient_repository import Repository
 
-repo = MedicineRepository()
-medicine_service = Bottle()
+repo = Repository()
 
 
-@medicine_service.route('/patients/<patient_id>', method='GET')
+@route('/patients/<patient_id>', method='GET')
 def get_patient(patient_id):
     patient = repo.load(patient_id)
     return dumps(patient)
 
 
-@medicine_service.route('/patients', method='POST')
+@route('/patients', method='POST')
 def create_patient():
     patient = json.loads(request.body.read().decode("utf-8"))
     patient_id = repo.save(patient)
@@ -24,7 +23,7 @@ def create_patient():
     return output
 
 
-@medicine_service.route('/patients', method='GET')
+@route('/patients', method='GET')
 def search_patient():
     name = request.query['name']
     output = None
@@ -41,3 +40,4 @@ def search_patient():
     return output
 
 
+run(host='localhost', port=8080, debug=True)
