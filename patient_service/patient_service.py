@@ -2,9 +2,8 @@ import json
 
 from bson.json_util import dumps
 from nameko.rpc import rpc
-from nameko.web.handlers import http
 
-from patient_service import patient_repository
+import patient_repository
 
 
 class PatientService():

@@ -4,7 +4,7 @@ from bson.json_util import dumps
 from nameko.rpc import rpc
 from nameko.web.handlers import http
 
-from medicine_service import medicine_repository
+import medicine_repository
 
 
 class MedicineService():

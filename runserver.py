@@ -1,7 +1,7 @@
 from nameko.containers import ServiceContainer
 
 # create a container
-from actions.PatientActions import PatientActions
+from gateway.PatientActions import PatientActions
 from medicine_service.medicine_service import MedicineService
 from patient_service.patient_service import PatientService
 
